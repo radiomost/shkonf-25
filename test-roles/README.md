@@ -92,7 +92,6 @@ git tag v1.0.0
 git push origin main --tags
 ```
 
-
 ## Tox
 1. Добавьте в директорию с vector-role файлы из директории.
 2. Запустите docker run --privileged=True -v <path_to_repo>:/opt/vector-role -w /opt/vector-role -it aragast/netology:latest /bin/bash, где path_to_repo — путь до корня репозитория с vector-role на вашей файловой системе.
@@ -102,6 +101,31 @@ git push origin main --tags
 6. Запустите команду tox. Убедитесь, что всё отработало успешно.
 7. Добавьте новый тег на коммит с рабочим сценарием в соответствии с семантическим версионированием.
 8. После выполнения у вас должно получится два сценария molecule и один tox.ini файл в репозитории. Не забудьте указать в ответе теги решений Tox и Molecule заданий. В качестве решения пришлите ссылку на ваш репозиторий и скриншоты этапов выполнения задания.
+
+## Решение
+
+Установим новые пакеты:
+
+```bash
+pip install -r tox-requirements.txt
+```
+
+Запуска сценария
+```bash
+docker run --privileged=True \
+  -v /root/netology/shkonf-25/test-roles/roles/vector-role:/opt/vector-role \
+  -w /opt/vector-role \
+  -it aragast/netology:latest /bin/bash
+```
+
+* Первый прогон tox - ошибка из-за отсутствия сценария compatibility
+* Создан облегчённый сценарий light
+
+![](img/img1.png)
+
+После исправления, на данном скриншоте мы видим что сценарий тестирования tox стал успешно выполнятся:
+
+![](img/img2.png)
 
 ## Необязательная часть
 1. Проделайте схожие манипуляции для создания роли LightHouse.
