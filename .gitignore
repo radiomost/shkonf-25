@@ -16,4 +16,4 @@ hosts.ini
 secrets.auto.tfvars
 cloud-init.yml
 
-# **/roles/*
+**/.tox/*
