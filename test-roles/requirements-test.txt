@@ -1,0 +1,5 @@
+ansible-core==2.16.1
+molecule==24.6.0
+molecule-docker
+molecule-podman==2.0.3
+click==8.1.7

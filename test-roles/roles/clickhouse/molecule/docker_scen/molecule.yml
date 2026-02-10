@@ -1,0 +1,8 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: aragast/netology:latest
+    pre_build_image: true
+    clickhouse_skip_sse42_check: true

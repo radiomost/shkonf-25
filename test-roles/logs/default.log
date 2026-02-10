@@ -1,0 +1,101 @@
+[1;35m[WARNING]: Collection community.docker does not support Ansible version 2.16.1[0m
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Set async_dir for HOME env] **********************************************
+[32mok: [localhost][0m
+
+TASK [Destroy molecule instance(s)] ********************************************
+[33mchanged: [localhost] => (item=ubuntu)[0m
+[33mchanged: [localhost] => (item=oraclelinux)[0m
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+[32mok: [localhost] => (item=ubuntu)[0m
+[32mok: [localhost] => (item=oraclelinux)[0m
+
+TASK [Delete docker networks(s)] ***********************************************
+[36mskipping: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[33mlocalhost[0m                  : [32mok=3   [0m [33mchanged=1   [0m unreachable=0    failed=0    [36mskipped=1   [0m rescued=0    ignored=0
+
+[1;35m[WARNING]: While constructing a mapping from /root/netology/shkonf-25/test-[0m
+[1;35mroles/roles/vector-role/meta/main.yml, line 2, column 3, found a duplicate dict[0m
+[1;35mkey (license). Using last defined value only.[0m
+
+playbook: /root/netology/shkonf-25/test-roles/roles/vector-role/molecule/default/converge.yml
+[1;35m[WARNING]: Collection community.docker does not support Ansible version 2.16.1[0m
+
+PLAY [Create] ******************************************************************
+
+TASK [Set async_dir for HOME env] **********************************************
+[32mok: [localhost][0m
+
+TASK [Log into a Docker registry] **********************************************
+[36mskipping: [localhost] => (item=None) [0m
+[36mskipping: [localhost] => (item=None) [0m
+[36mskipping: [localhost][0m
+
+TASK [Check presence of custom Dockerfiles] ************************************
+[32mok: [localhost] => (item={'command': '/sbin/init', 'image': 'ubuntu:latest', 'name': 'ubuntu', 'pre_build_image': True})[0m
+[32mok: [localhost] => (item={'command': '/sbin/init', 'image': 'oraclelinux:8', 'name': 'oraclelinux', 'pre_build_image': True, 'privileged': True})[0m
+
+TASK [Create Dockerfiles from image names] *************************************
+[36mskipping: [localhost] => (item={'command': '/sbin/init', 'image': 'ubuntu:latest', 'name': 'ubuntu', 'pre_build_image': True}) [0m
+[36mskipping: [localhost] => (item={'command': '/sbin/init', 'image': 'oraclelinux:8', 'name': 'oraclelinux', 'pre_build_image': True, 'privileged': True}) [0m
+[36mskipping: [localhost][0m
+
+TASK [Synchronization the context] *********************************************
+[36mskipping: [localhost] => (item={'command': '/sbin/init', 'image': 'ubuntu:latest', 'name': 'ubuntu', 'pre_build_image': True}) [0m
+[36mskipping: [localhost] => (item={'command': '/sbin/init', 'image': 'oraclelinux:8', 'name': 'oraclelinux', 'pre_build_image': True, 'privileged': True}) [0m
+[36mskipping: [localhost][0m
+
+TASK [Discover local Docker images] ********************************************
+[32mok: [localhost] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'false_condition': 'not item.pre_build_image | default(false)', 'item': {'command': '/sbin/init', 'image': 'ubuntu:latest', 'name': 'ubuntu', 'pre_build_image': True}, 'ansible_loop_var': 'item', 'i': 0, 'ansible_index_var': 'i'})[0m
+[32mok: [localhost] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'false_condition': 'not item.pre_build_image | default(false)', 'item': {'command': '/sbin/init', 'image': 'oraclelinux:8', 'name': 'oraclelinux', 'pre_build_image': True, 'privileged': True}, 'ansible_loop_var': 'item', 'i': 1, 'ansible_index_var': 'i'})[0m
+
+TASK [Build an Ansible compatible image (new)] *********************************
+[36mskipping: [localhost] => (item=molecule_local/ubuntu:latest) [0m
+[36mskipping: [localhost] => (item=molecule_local/oraclelinux:8) [0m
+[36mskipping: [localhost][0m
+
+TASK [Create docker network(s)] ************************************************
+[36mskipping: [localhost][0m
+
+TASK [Determine the CMD directives] ********************************************
+[32mok: [localhost] => (item={'command': '/sbin/init', 'image': 'ubuntu:latest', 'name': 'ubuntu', 'pre_build_image': True})[0m
+[32mok: [localhost] => (item={'command': '/sbin/init', 'image': 'oraclelinux:8', 'name': 'oraclelinux', 'pre_build_image': True, 'privileged': True})[0m
+
+TASK [Create molecule instance(s)] *********************************************
+[33mchanged: [localhost] => (item=ubuntu)[0m
+[33mchanged: [localhost] => (item=oraclelinux)[0m
+
+TASK [Wait for instance(s) creation to complete] *******************************
+[31mfailed: [localhost] (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j207461037773.1069857', 'results_file': '/root/.ansible_async/j207461037773.1069857', 'changed': True, 'item': {'command': '/sbin/init', 'image': 'ubuntu:latest', 'name': 'ubuntu', 'pre_build_image': True}, 'ansible_loop_var': 'item'}) => {"ansible_job_id": "j207461037773.1069857", "ansible_loop_var": "item", "attempts": 2, "changed": false, "finished": 1, "item": {"ansible_job_id": "j207461037773.1069857", "ansible_loop_var": "item", "changed": true, "failed": 0, "finished": 0, "item": {"command": "/sbin/init", "image": "ubuntu:latest", "name": "ubuntu", "pre_build_image": true}, "results_file": "/root/.ansible_async/j207461037773.1069857", "started": 1}, "msg": "Error starting container 44d5df35bc096e5b20bd1d6b55087b9bcb07cc3ecf094c36b755ff25e623399e: 400 Client Error for http+docker://localhost/v1.52/containers/44d5df35bc096e5b20bd1d6b55087b9bcb07cc3ecf094c36b755ff25e623399e/start: Bad Request (\"failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: exec: \"/sbin/init\": stat /sbin/init: no such file or directory\")", "results_file": "/root/.ansible_async/j207461037773.1069857", "started": 1, "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}[0m
+[1;30mFAILED - RETRYING: [localhost]: Wait for instance(s) creation to complete (300 retries left).[0m
+[33mchanged: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j626810777425.1069882', 'results_file': '/root/.ansible_async/j626810777425.1069882', 'changed': True, 'item': {'command': '/sbin/init', 'image': 'oraclelinux:8', 'name': 'oraclelinux', 'pre_build_image': True, 'privileged': True}, 'ansible_loop_var': 'item'})[0m
+
+PLAY RECAP *********************************************************************
+[31mlocalhost[0m                  : [32mok=5   [0m [33mchanged=1   [0m unreachable=0    [31mfailed=1   [0m [36mskipped=5   [0m rescued=0    ignored=0
+
+[1;35m[WARNING]: Collection community.docker does not support Ansible version 2.16.1[0m
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Set async_dir for HOME env] **********************************************
+[32mok: [localhost][0m
+
+TASK [Destroy molecule instance(s)] ********************************************
+[33mchanged: [localhost] => (item=ubuntu)[0m
+[33mchanged: [localhost] => (item=oraclelinux)[0m
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+[33mchanged: [localhost] => (item=ubuntu)[0m
+[33mchanged: [localhost] => (item=oraclelinux)[0m
+
+TASK [Delete docker networks(s)] ***********************************************
+[36mskipping: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[33mlocalhost[0m                  : [32mok=3   [0m [33mchanged=2   [0m unreachable=0    failed=0    [36mskipped=1   [0m rescued=0    ignored=0
+
