@@ -1,0 +1,16 @@
+- name: Install Vector
+  apt:
+    name: vector
+    state: present
+
+- name: Configure Vector
+  template:
+    src: vector.yml.j2
+    dest: /etc/vector/vector.yml
+  notify: Restart vector
+
+- name: Enable and start Vector
+  service:
+    name: vector
+    state: started
+    enabled: true

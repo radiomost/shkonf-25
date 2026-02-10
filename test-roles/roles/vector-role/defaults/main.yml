@@ -1,0 +1,2 @@
+clickhouse_host: localhost
+clickhouse_db: logs

@@ -1,0 +1,26 @@
+galaxy_info:
+  role_name: vector
+  namespace: sergeyivanov
+  author: Sergey Ivanov
+  description: Role for Vector
+  company: radiomost
+
+  license: MIT
+
+  # - CC-BY-4.0
+  license: license (GPL-2.0-or-later, MIT, etc)
+
+  min_ansible_version: 2.16
+  
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: EL
+      versions:
+        - "8"
+
+  galaxy_tags: []
+
+
+dependencies: []

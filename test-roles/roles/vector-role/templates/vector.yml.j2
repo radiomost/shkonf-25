@@ -1,0 +1,13 @@
+sources:
+  syslog:
+    type: file
+    include:
+      - /var/log/*.log
+
+sinks:
+  clickhouse:
+    type: clickhouse
+    inputs:
+      - syslog
+    endpoint: "http://{{ clickhouse_host }}:8123"
+    database: "{{ clickhouse_db }}"

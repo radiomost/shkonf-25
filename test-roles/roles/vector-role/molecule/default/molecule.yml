@@ -1,0 +1,36 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+platforms:
+  - name: ubuntu
+    image: ubuntu:latest
+    pre_build_image: true
+    command: /bin/bash
+    tty: true
+    interactive: true
+    env:
+      ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
+  - name: oraclelinux
+    image: oraclelinux:8
+    pre_build_image: true
+    command: /bin/bash
+    tty: true
+    interactive: true
+    env:
+      ANSIBLE_PYTHON_INTERPRETER: /usr/libexec/platform-python
+
+provisioner:
+  name: ansible
+  log: true
+  env:
+    ANSIBLE_REMOTE_TMP: /tmp/.ansible/tmp
+  config_options:
+    defaults:
+      remote_tmp: /tmp/.ansible/tmp
+      interpreter_python: auto_silent
+
+verifier:
+  name: ansible

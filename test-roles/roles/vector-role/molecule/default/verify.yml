@@ -1,0 +1,56 @@
+---
+- name: Verify vector-role
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Check Vector binary exists
+      stat:
+        path: /usr/bin/vector
+      register: vector_bin
+
+    - name: Assert Vector binary installed
+      assert:
+        that:
+          - vector_bin.stat.exists
+        fail_msg: "Vector binary not found"
+        success_msg: "Vector binary exists"
+
+    - name: Check Vector config exists
+      stat:
+        path: /etc/vector/vector.toml
+      register: vector_config
+
+    - name: Assert Vector config exists
+      assert:
+        that:
+          - vector_config.stat.exists
+        fail_msg: "Vector config file does not exist"
+        success_msg: "Vector config file exists"
+
+    - name: Validate Vector config
+      command: vector validate /etc/vector/vector.toml
+      register: vector_validate
+      changed_when: false
+      failed_when: vector_validate.rc != 0
+
+    - name: Assert Vector config is valid
+      assert:
+        that:
+          - vector_validate.rc == 0
+        fail_msg: "Vector config validation failed"
+        success_msg: "Vector config is valid"
+
+    - name: Check Vector process is running
+      shell: pgrep -f vector
+      register: vector_process
+      changed_when: false
+      failed_when: vector_process.rc != 0
+
+    - name: Assert Vector is running
+      assert:
+        that:
+          - vector_process.rc == 0
+        fail_msg: "Vector process is not running"
+        success_msg: "Vector process is running"

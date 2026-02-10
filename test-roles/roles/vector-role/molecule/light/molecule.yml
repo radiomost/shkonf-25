@@ -1,0 +1,23 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: podman
+
+platforms:
+  - name: instance
+    image: docker.io/library/ubuntu:20.04
+    pre_build_image: true
+    command: /sbin/init
+    privileged: true
+
+provisioner:
+  name: ansible
+  inventory:
+    host_vars:
+      instance:
+        ansible_python_interpreter: /usr/bin/python3
+
+verifier:
+  name: ansible
