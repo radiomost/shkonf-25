@@ -127,6 +127,23 @@ docker run --privileged=True \
 
 ![](img/img2.png)
 
+
+Последовательность команд
+
+```bash
+git status
+git add .
+git commit -m "Add molecule tests and verification for vector-role and clickhouse"
+```
+
+Добавляем тег:
+
+```bash
+git tag v1.1.0
+git push origin main --tags
+```
+
+
 ## Необязательная часть
 1. Проделайте схожие манипуляции для создания роли LightHouse.
 2. Создайте сценарий внутри любой из своих ролей, который умеет поднимать весь стек при помощи всех ролей.
