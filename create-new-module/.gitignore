@@ -17,4 +17,3 @@ secrets.auto.tfvars
 cloud-init.yml
 
 **/.tox/*
-.vscode/
