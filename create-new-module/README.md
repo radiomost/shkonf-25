@@ -16,7 +16,7 @@
 
 Ваша цель — написать собственный module, который вы можете использовать в своей role через playbook. Всё это должно быть собрано в виде collection и отправлено в ваш репозиторий.
 
-**Шаг 1.** В виртуальном окружении создайте новый my_own_module.py файл.
+**Шаг 1.** В виртуальном окружении создайте новый `my_own_module.py` файл.
 
 **Шаг 2.** Наполните его содержимым:
 
@@ -256,7 +256,7 @@ def run_module():
 **path** - принимает путь к создаваемуму файлу;
 **content** - Текстовое содержание которое должнро быть в файле
 
-Создаем в ккорне реозиоория Ansible файл с параметрами запуска `payload.json`:
+Создаем в корне проекта домашнего задания файл с параметрами запуска `payload.json`:
 
 ```yaml
 {
@@ -269,10 +269,10 @@ def run_module():
 
 ## Шаг 3. Проверка module на исполняемость локально.
 
-И запускаем созданный модуль командой:
+И запускаем созданный модуль командой из папки ansible:
 
 ```bash
-python3 -m ansible.modules.my_own_module payload.json
+python3 -m ansible.modules.my_own_module ../payload.json
 ```
 ![](img/img1.png)
 
@@ -282,7 +282,7 @@ python3 -m ansible.modules.my_own_module payload.json
 
 
 ## Шаг 4. Создаем single task playbook и используем module в нём.
-Создаем файл в корне директории ansible `single_playbooks.yaml`
+Создаем файл в корне проекта домашнего задания `single_playbooks.yaml`
 
 ```yaml
 ---
@@ -295,7 +295,7 @@ python3 -m ansible.modules.my_own_module payload.json
         content: Example create new file in directory tmp and add text.
 ```
 
-Запускаем плейбук `ansible-playbook single_playbooks.yaml `
+Запускаем плейбук `ansible-playbook ../single_playbooks.yaml `
 
 
 Результат выполнения команды:
@@ -306,9 +306,6 @@ python3 -m ansible.modules.my_own_module payload.json
 
 Изменяем созданный файл
 
-```bash
-
-```
 И удаляем часть слов, напрмер, исходный текст `Example create new file in directory tmp and add text.` изменяем в текст `file in directory tmp and add text.`
 
 ![](img/img4.png)
@@ -378,7 +375,7 @@ content: "Example create new file in directory tmp and add text."
 ```bash
 git add .
 git commit -m "Add my_own_module, role and documentation"
-git tag 1.2.0
+git tag 1.3.2
 git push origin main --tags
 ```
 
