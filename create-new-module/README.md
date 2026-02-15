@@ -322,6 +322,21 @@ python3 -m ansible.modules.my_own_module ../payload.json
 
 ## Шаг 6. Инициализируем новую collection: ansible-galaxy collection init my_own_namespace.yandex_cloud_elk
 
+Структура коллекции:
+
+```
+my_own_namespace/
+└── yandex_cloud_elk/
+    ├── galaxy.yml
+    ├── plugins/
+    └── roles/
+        └── create_file/
+            ├── tasks/
+            ├── defaults/
+            └── ...
+```
+
+
 ```bash
 ansible-galaxy collection init my_own_namespace.yandex_cloud_elk
 
@@ -333,10 +348,10 @@ mv lib/ansible/modules/my_own_module.py my_own_namespace/yandex_cloud_elk/plugin
 ## Шаг 6. Преобразование single task playbook в role
 
 ```bash
-ansible-galaxy role init my_own_namespace/yandex_cloud_elk.roles.create_file
+ansible-galaxy role init my_own_namespace/yandex_cloud_elk/roles/create_file
 ```
 
-Переносим задачу из playbook в `my_own_namespace/yandex_cloud_elk.roles.create_file/tasks/main.yml`:
+Переносим задачу из playbook в `my_own_namespace/yandex_cloud_elk/roles/create_file/tasks/main.yml`:
 ```yaml
 - name: Create file with my module
   my_own_module:
@@ -359,8 +374,12 @@ content: "Example create new file in directory tmp and add text."
 ```yaml
 - hosts: localhost
   gather_facts: no
+
+  collections:
+    - my_own_namespace.yandex_cloud_elk
+
   roles:
-    - role: my_own_namespace.yandex_cloud_elk.create_file
+    - role: create_file
       vars:
         path: "/tmp/test_role_file.txt"
         content: "File create for role"
@@ -379,3 +398,63 @@ git tag 1.3.2
 git push origin main --tags
 ```
 
+## Шаг 9. Создание .tar.gz collection
+
+Находясь в корне collection `shkonf-25/create-new-module/ansible/my_own_namespace/yandex_cloud_elk`
+
+```bash
+ansible-galaxy collection build
+```
+Получаем файл `my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz`
+
+Копирую архив в корень проекта домашнего задания:
+
+## Шаг 10. Подготовка директории для playbook и архива
+
+
+```bash
+#Переходим в директорию домашнего задания
+cd ~/netology/shkonf-25/create-new-module/
+
+#Создаем папку новую папку
+mkdir collection_test
+cd collection_test
+
+# Скопируем туда:
+cp ../ansible/my_own_namespace/yandex_cloud_elk/my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz ./
+```
+
+## Шаг 11. Установка collection из локального архива
+
+```bash
+ansible-galaxy collection install my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz -p ~/.ansible/collections --force
+```
+![](img/img7.png)
+
+Проверить установку можно:
+
+```bash
+ansible-galaxy collection list | grep my_own_namespace
+```
+
+![](img/img8.png)
+
+## Шаг 12. Запуск playbook
+
+```bash
+cd ..
+ansible-playbook -i localhost, playbook_use_role.yml
+```
+
+![](img/img9.png)
+
+## Шаг 13. Финальный коммит
+
+Создаем коммит:
+
+```bash
+git add .
+git commit -m "Add my_own_module, role and documentation"
+git tag 1.3.3
+git push origin main --tags
+```
